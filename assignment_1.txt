@@ -1,0 +1,114 @@
+static int Q3(int[] arr , int target){
+    if (target > arr[arr.length-1]){
+        return arr.length;
+    }
+    int start = 0;
+    int end = arr.length-1;
+    int mid = 0;
+    while (start<=end){
+        // find mid
+        mid = start + (end-start)/2;
+        if(target == arr[mid]){
+            return mid;
+        } else if (target<arr[mid]) {
+            end = mid - 1;
+        }else{
+            start = mid + 1;
+        }
+    }
+    return start;
+}
+
+static void Q7(int[] arr) {
+        int i=0,count=arr.length-2;
+        while (i<arr.length && count >=0){
+            if (arr[i] == 0) {
+                for (int j=i,k=i+1; k<arr.length; ++j, k++){
+                    int temp = arr[k];
+                    arr[k] = arr[j];
+                    arr[j] = temp; 
+                }
+            }else{
+                i++;
+            }
+            count--;
+        } 
+    }
+
+static boolean Q6(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i+1; j < arr.length; j++) {
+                if (arr[i] == arr[j]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+static int[] Q4(int[] arr) {
+        int[] res = new int[arr.length];
+        int carry = 1;
+        boolean all9 = true;
+        for (int i : arr) {
+            if (i == 9) continue;
+            else{
+                all9 = false;
+                break;
+            }
+        }
+        if (all9) {
+            res = new int[arr.length +1];
+            res[0] = 1;
+            return res;
+        }
+        for (int i = arr.length-1; i >= 0; i--) {
+            if (carry>0){
+                arr[i]++;
+                carry = 0;
+            }
+            if (arr[i] > 9) {
+                arr[i] = arr[i] % 10;
+                carry = 1;
+            }
+        }
+        return arr;
+    }
+
+public static int[] Q1(int[] nums, int target) {
+        int[] result =  {0,0};
+        for(int i=0;i<nums.length;++i){
+            for(int j=i+1;j<nums.length;++j){
+                if(nums[i]+nums[j] == target) {
+                    result[0] = i ;
+                    result[1] = j ;
+                }
+            }
+        }
+        return result;
+    }
+
+static int Q2(int[] arr, int val) {
+        int t = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == val) {
+                arr[i] = 0;
+                t++;
+            }
+        }
+        int i = 0, count = arr.length - 2;
+        while (i < arr.length && count >= 0) {
+            if (arr[i] == 0) {
+                for (int j = i, k = i + 1; k < arr.length; ++j, k++) {
+                    int temp = arr[k];
+                    arr[k] = arr[j];
+                    arr[j] = temp;
+                }
+            } else {
+                i++;
+            }
+            count--;
+        }
+
+        return arr.length - t;
+    }
