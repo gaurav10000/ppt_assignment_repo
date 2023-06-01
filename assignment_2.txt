@@ -1,0 +1,83 @@
+static boolean Q7(int[] nums) {
+        if (nums[0] <= nums[nums.length-1]){
+            for(int i=0;i<nums.length-1; i++) {
+                if (nums[i] > nums[i+1]) return false;
+            }
+        }
+        if (nums[0] > nums[nums.length-1]){
+            for(int i=0;i<nums.length-1; i++) {
+                if (nums[i] < nums[i+1]) return false;
+            }
+        }
+        return true;
+}
+
+static boolean Q4(int[] flowerbed, int n) {
+        boolean prev = false;
+        for(int i=0; i<flowerbed.length; ++i) {
+            if(flowerbed[i] == 1){
+                prev = true;
+                continue;
+            }
+            else {
+                if(i < flowerbed.length-1 && flowerbed[i+1] == 1){
+                    prev = false;
+                    continue;
+                }
+                else {
+                    if(prev == true) {
+                        prev = false;
+                        continue;
+                    }
+                    else {
+                        n--;
+                        prev = true;
+                    }
+                }
+            }
+        }
+        if(n <= 0) return true;
+        else{
+            return false;
+        }
+    }
+static int Q5(int[] nums) {
+         Arrays.sort(nums);
+        //  int largest = nums[0], sec_largest = nums[0], thr_largest = nums[0];
+        //  for(int i=1; i<nums.length; ++i){
+        //      if(largest<nums[i]){
+        //          thr_largest = sec_largest;
+        //          sec_largest = largest;
+        //          largest = nums[i];
+        //      }
+        //  }
+        //  return 
+        int prod1 = nums[0]*nums[1]*nums[nums.length-1];
+        int prod2 = nums[nums.length-3]*nums[nums.length-2]*nums[nums.length-1];
+
+        return prod1>prod2?prod1:prod2;
+    }
+static int Q6(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length-1;
+        int mid = start + (end - start)/2;
+        while(start<=end){
+            if(target > nums[mid]){
+                start = mid+1;
+                mid = start + (end - start)/2;
+            }else if(target < nums[mid]) {
+                end = mid-1;
+                mid = start + (end - start)/2;
+            }else{
+                return mid;
+            }
+        }
+        return -1;
+    }
+static int Q2(int[] candyType) {
+        Set<Integer> set = new HashSet<>();
+        for(int x : candyType){
+            set.add(x);
+        }
+        return set.size() > candyType.length/2 ?  candyType.length/2 : set.size();
+    }
